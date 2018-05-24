@@ -1,21 +1,19 @@
 // Third-party components
 import React, { Component } from 'react';
-import Particles from 'react-particles-js';
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Switch,
-  Redirect,
-  withRouter
+  Redirect
 } from 'react-router-dom';
+import axios from 'axios';
 import Clarifai from 'clarifai';
 
 // Custom components
+import Background from './components/Background/Background';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Login from './components/Login/Login';
-import Logo from './components/Logo/Logo';
 import Navigation from './components/Navigation/Navigation';
 import Rank from './components/Rank/Rank';
 import Register from './components/Register/Register';
@@ -27,34 +25,6 @@ const clarifai = new Clarifai.App({
   apiKey: 'f8a3741b719346d9aacc57eb53cf1882'
 });
 
-const particlesOptions = {
-  particles: {
-    number: {
-      value: 40,
-      density: {
-        enable: true,
-        value_area: 800
-      }
-    }
-  },
-  interactivity: {
-    detect_on: 'canvas',
-    events: {
-      onhover: {
-        enable: true,
-        mode: 'repulse'
-      }
-    }
-  },
-  line_linked: {
-    shadow: {
-      enable: true,
-      color: "#3CA9D1",
-      blur: 5
-    }
-  }
-}
-
 export default class App extends Component {
   constructor () {
     super();
@@ -63,10 +33,9 @@ export default class App extends Component {
       input: '',
       imageUrl: '',
       box: {},
-      route: 'login',
       isLoggedIn: false,
       user: {
-        id: '789',
+        id: '',
         name: '',
         email: '',
         entries: 0,
@@ -77,6 +46,7 @@ export default class App extends Component {
 
   loadUser = (data) => {
     this.setState({
+      isLoggedIn: true,
       user: {
         id: data.id,
         name: data.name,
@@ -116,62 +86,56 @@ export default class App extends Component {
       .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
       .then(response => {
         if (response) {
-          fetch('http://localhost:4000/image', {
-            method: 'put',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-              id: this.state.user.id
-            })
-          }).then(response => response.json())
-          .then(count => {
+          axios.put('http://localhost:4000/image', {
+            id: this.state.user.id
+          })
+          .then(response => {
+            console.log(response);
+            console.log(response.data);
             this.setState({
-              entries: count
+              user: {
+                id: this.state.user.id,
+                name: this.state.user.name,
+                email: this.state.user.email,
+                entries: response.data,
+                joined: this.state.user.joined
+              }
             });
           })
+          .catch(error => console.log(error))
         }
         this.displayFaceBox(this.calculateFaceLocation(response));
       })
       .catch(err => console.log(err));
   }
 
-  onRouteChange = (route) => {
-    this.setState({
-      route
-    });
-
-    if (route === 'logout') {
-      this.setState({
-        isLoggedIn: false
-      });
-    } else if (route === 'home') {
-      this.setState({
-        isLoggedIn: true
-      });
-    }
-  }
-
   render () {
-    const { isLoggedIn, imageUrl, route, box, user } = this.state;
+    const { isLoggedIn, imageUrl, box, user } = this.state;
     
     return (
       <div>
-        <Particles params={particlesOptions} className='particles'/>
-        <Navigation isLoggedIn={isLoggedIn} onRouteChange={this.onRouteChange} />
+        <Background />
         <Router>
           <Switch>
-            <Route exact path='/' render={() => (
+            <Route exact path='/' render={() => isLoggedIn ? (
               <div>
-                <Logo />
+                <Navigation isLoggedIn={isLoggedIn} />
                 <Rank name={user.name} entries={user.entries} />
                 <ImageLinkForm inputChange={this.onInputChange} submit={this.onSubmit} />
                 <FaceRecognition box={box} imageUrl={imageUrl} />
               </div>
-            )} />
+            ) : <Redirect to='/login' />} />
             <Route path='/login' render={() => (
-              <Login loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+              <div>
+                <Navigation isLoggedIn={isLoggedIn} />
+                <Login loadUser={this.loadUser} />
+              </div>
             )} />
             <Route path='/register' render={() => (
-              <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+              <div>
+                <Navigation isLoggedIn={isLoggedIn} />
+                <Register loadUser={this.loadUser} />
+              </div>
             )} />
           </Switch>
         </Router>

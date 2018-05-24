@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import axios from 'axios';
 
-export default class Login extends Component {
+class Login extends Component {
     constructor (props) {
         super(props);
+
         this.state = {
             loginEmail: '',
             loginPassword: ''
@@ -17,25 +20,23 @@ export default class Login extends Component {
         this.setState({ loginPassword: event.target.value });
     }
 
-    onSubmitLogin = () => {
-        fetch('http://localhost:4000/login', {
-            method: 'post',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                email: this.state.loginEmail,
-                password: this.state.loginPassword
-            })
-        }).then(response => response.json())
+    onSubmitLogin = (event) => {
+        event.preventDefault();
+
+        axios.post('http://localhost:4000/login', {
+            email: this.state.loginEmail,
+            password: this.state.loginPassword
+        })
         .then(user => {
-            if (user.id) {
-                this.props.loadUser(user);
-                this.props.onRouteChange('home');
+            if (user.data.id) {
+                this.props.loadUser(user.data);
+                this.props.history.push('/');
             }
-        });
+        })
+        .catch(error => console.log(error))
     }
 
     render () {
-        const { onRouteChange } = this.props;
         return (
             <article className='br3 ba b--black-10 mv4 w-100 w-50-m w-25-1 mw6 shadow-5 center' style={{ textAlign: 'center' }}>
                 <main className="pa4 black-80">
@@ -72,7 +73,7 @@ export default class Login extends Component {
                             />
                         </div>
                         <div className="lh-copy mt3">
-                            <p onClick={() => onRouteChange('register')} className="f6 link dim black db pointer">Register</p>
+                            <Link to='/register' className="f6 link dim black db pointer">Register</Link>
                         </div>
                     </form>
                 </main>
@@ -80,3 +81,5 @@ export default class Login extends Component {
         );
     }
 }
+
+export default withRouter(Login);

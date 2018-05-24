@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 
-export default class Register extends Component {
+class Register extends Component {
     constructor(props) {
         super(props)
 
@@ -23,27 +25,24 @@ export default class Register extends Component {
         this.setState({ password: event.target.value });
     }
 
-    onSubmitRegister = () => {
-        fetch('http://localhost:4000/register', {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email: this.state.email,
-                password: this.state.password,
-                name: this.state.name
-            })
-        }).then(response => response.json())
+    onSubmitRegister = (event) => {
+        event.preventDefault();
+
+        axios.post('http://localhost:4000/register', {
+            email: this.state.email,
+            password: this.state.password,
+            name: this.state.name
+        })
             .then(user => {
-                if (user) {
-                    this.props.loadUser(user)
-                    this.props.onRouteChange('home');
+                if (user.data.id) {
+                    this.props.loadUser(user.data);
+                    this.props.history.push('/');
                 }
             })
+            .catch(error => console.log(error))
     }
 
     render() {
-        const { onRouteChange } = this.props;
-
         return (
             <article className='br3 ba b--black-10 mv4 w-100 w-50-m w-25-1 mw6 shadow-5 center' style={{ textAlign: 'center' }}>
                 <main className="pa4 black-80">
@@ -95,3 +94,5 @@ export default class Register extends Component {
         );
     }
 }
+
+export default withRouter(Register);
