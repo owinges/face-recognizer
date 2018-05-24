@@ -10,5 +10,8 @@ The app accepts the URL for a picture and will determine whether there are faces
 
 **Upcoming Changes**
 * Clean up / optimize code
+* Implement validation for all forms
+* Display errors in the front end (currently only displayed in the console)
+* Display loading indicator (spinner, etc) when waiting for API response
 * Change styling completely; remove Tachyons.
 * Expand app to also include the demographics model from Clarifai.

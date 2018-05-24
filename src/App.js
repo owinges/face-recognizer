@@ -7,7 +7,6 @@ import {
   Redirect
 } from 'react-router-dom';
 import axios from 'axios';
-import Clarifai from 'clarifai';
 
 // Custom components
 import Background from './components/Background/Background';
@@ -20,10 +19,6 @@ import Register from './components/Register/Register';
 
 // Other imports
 import './App.css';
-
-const clarifai = new Clarifai.App({
-  apiKey: 'f8a3741b719346d9aacc57eb53cf1882'
-});
 
 export default class App extends Component {
   constructor () {
@@ -57,8 +52,24 @@ export default class App extends Component {
     });
   }
 
-  calculateFaceLocation = (data) => {
-    const clarifaiFaces = data.outputs[0].data.regions;
+  clearUser = () => {
+    this.setState({
+      input: '',
+      imageUrl: '',
+      boxes: [],
+      isLoggedIn: false,
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        entries: 0,
+        joined: ''
+      }
+    });
+  }
+
+  calculateFaceLocation = (response) => {
+    const clarifaiFaces = response.data.outputs[0].data.regions;
     const image = document.getElementById('inputImage');
     const width = Number(image.width);
     const height = Number(image.height);
@@ -87,29 +98,31 @@ export default class App extends Component {
   onSubmit = () => {
     this.setState({ imageUrl: this.state.input });
 
-    clarifai.models
-      .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
-      .then(response => {
-        if (response) {
-          axios.put('http://localhost:4000/image', {
-            id: this.state.user.id
-          })
-          .then(response => {
-            this.setState({
-              user: {
-                id: this.state.user.id,
-                name: this.state.user.name,
-                email: this.state.user.email,
-                entries: response.data,
-                joined: this.state.user.joined
-              }
-            });
-          })
-          .catch(error => console.log(error))
-        }
-        this.displayFaceBoxes(this.calculateFaceLocation(response));
-      })
-      .catch(err => console.log(err));
+    axios.post('http://localhost:4000/imageurl', {
+      input: this.state.input
+    })
+    .then(response => {
+      console.log(response);
+      if (response) {
+        axios.put('http://localhost:4000/image', {
+          id: this.state.user.id
+        })
+        .then(response => {
+          this.setState({
+            user: {
+              id: this.state.user.id,
+              name: this.state.user.name,
+              email: this.state.user.email,
+              entries: response.data,
+              joined: this.state.user.joined
+            }
+          });
+        })
+        .catch(error => console.log(error))
+      }
+      this.displayFaceBoxes(this.calculateFaceLocation(response));
+    })
+    .catch(err => console.log(err));
   }
 
   render () {
@@ -131,7 +144,7 @@ export default class App extends Component {
             <Route path='/login' render={() => (
               <div>
                 <Navigation isLoggedIn={isLoggedIn} />
-                <Login loadUser={this.loadUser} />
+                <Login clearUser={this.clearUser} loadUser={this.loadUser} />
               </div>
             )} />
             <Route path='/register' render={() => (
