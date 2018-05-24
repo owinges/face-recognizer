@@ -28,7 +28,7 @@ class Register extends Component {
     onSubmitRegister = (event) => {
         event.preventDefault();
 
-        axios.post('http://localhost:4000/register', {
+        axios.post('https://young-temple-60018.herokuapp.com/register', {
             email: this.state.email,
             password: this.state.password,
             name: this.state.name

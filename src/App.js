@@ -98,13 +98,12 @@ export default class App extends Component {
   onSubmit = () => {
     this.setState({ imageUrl: this.state.input });
 
-    axios.post('http://localhost:4000/imageurl', {
+    axios.post('https://young-temple-60018.herokuapp.com/imageurl', {
       input: this.state.input
     })
     .then(response => {
-      console.log(response);
       if (response) {
-        axios.put('http://localhost:4000/image', {
+        axios.put('https://young-temple-60018.herokuapp.com/image', {
           id: this.state.user.id
         })
         .then(response => {
