@@ -32,7 +32,7 @@ export default class App extends Component {
     this.state = {
       input: '',
       imageUrl: '',
-      box: {},
+      boxes: [],
       isLoggedIn: false,
       user: {
         id: '',
@@ -58,21 +58,26 @@ export default class App extends Component {
   }
 
   calculateFaceLocation = (data) => {
-    const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
+    const clarifaiFaces = data.outputs[0].data.regions;
     const image = document.getElementById('inputImage');
     const width = Number(image.width);
     const height = Number(image.height);
-    return {
-      leftCol: clarifaiFace.left_col * width,
-      topRow: clarifaiFace.top_row * height,
-      rightCol: width - (clarifaiFace.right_col * width),
-      bottomRow: height - (clarifaiFace.bottom_row * height)
-    };
+    let output = [];
+
+    clarifaiFaces.map(face => {
+      return output.push({
+        leftCol: face.region_info.bounding_box.left_col * width,
+        topRow: face.region_info.bounding_box.top_row * height,
+        rightCol: width - (face.region_info.bounding_box.right_col * width),
+        bottomRow: height - (face.region_info.bounding_box.bottom_row * height)   
+      });
+    })
+
+    return output;
   }
 
-  displayFaceBox = (box) => {
-    console.log(box);
-    this.setState({ box });
+  displayFaceBoxes = (boxes) => {
+    this.setState({ boxes });
   }
 
   onInputChange = (event) => {
@@ -90,8 +95,6 @@ export default class App extends Component {
             id: this.state.user.id
           })
           .then(response => {
-            console.log(response);
-            console.log(response.data);
             this.setState({
               user: {
                 id: this.state.user.id,
@@ -104,13 +107,13 @@ export default class App extends Component {
           })
           .catch(error => console.log(error))
         }
-        this.displayFaceBox(this.calculateFaceLocation(response));
+        this.displayFaceBoxes(this.calculateFaceLocation(response));
       })
       .catch(err => console.log(err));
   }
 
   render () {
-    const { isLoggedIn, imageUrl, box, user } = this.state;
+    const { isLoggedIn, imageUrl, boxes, user } = this.state;
     
     return (
       <div>
@@ -122,7 +125,7 @@ export default class App extends Component {
                 <Navigation isLoggedIn={isLoggedIn} />
                 <Rank name={user.name} entries={user.entries} />
                 <ImageLinkForm inputChange={this.onInputChange} submit={this.onSubmit} />
-                <FaceRecognition box={box} imageUrl={imageUrl} />
+                <FaceRecognition boxes={boxes} imageUrl={imageUrl} />
               </div>
             ) : <Redirect to='/login' />} />
             <Route path='/login' render={() => (
