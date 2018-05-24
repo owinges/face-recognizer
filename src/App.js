@@ -1,6 +1,14 @@
 // Third-party components
 import React, { Component } from 'react';
 import Particles from 'react-particles-js';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect,
+  withRouter
+} from 'react-router-dom';
 import Clarifai from 'clarifai';
 
 // Custom components
@@ -56,8 +64,27 @@ export default class App extends Component {
       imageUrl: '',
       box: {},
       route: 'login',
-      isLoggedIn: false
+      isLoggedIn: false,
+      user: {
+        id: '789',
+        name: '',
+        email: '',
+        entries: 0,
+        joined: ''
+      }
     };
+  }
+
+  loadUser = (data) => {
+    this.setState({
+      user: {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        entries: data.entries,
+        joined: data.joined
+      }
+    });
   }
 
   calculateFaceLocation = (data) => {
@@ -87,11 +114,31 @@ export default class App extends Component {
 
     clarifai.models
       .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
-      .then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
+      .then(response => {
+        if (response) {
+          fetch('http://localhost:4000/image', {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              id: this.state.user.id
+            })
+          }).then(response => response.json())
+          .then(count => {
+            this.setState({
+              entries: count
+            });
+          })
+        }
+        this.displayFaceBox(this.calculateFaceLocation(response));
+      })
       .catch(err => console.log(err));
   }
 
   onRouteChange = (route) => {
+    this.setState({
+      route
+    });
+
     if (route === 'logout') {
       this.setState({
         isLoggedIn: false
@@ -101,31 +148,33 @@ export default class App extends Component {
         isLoggedIn: true
       });
     }
-    this.setState({
-      route
-    });
   }
 
   render () {
-    const { isLoggedIn, imageUrl, route, box } = this.state;
+    const { isLoggedIn, imageUrl, route, box, user } = this.state;
     
     return (
       <div>
         <Particles params={particlesOptions} className='particles'/>
         <Navigation isLoggedIn={isLoggedIn} onRouteChange={this.onRouteChange} />
-        { route === 'home' ?
-          <div>
-            <Logo />
-            <Rank />
-            <ImageLinkForm inputChange={this.onInputChange} submit={this.onSubmit}/>
-            <FaceRecognition box={box} imageUrl={imageUrl} />
-          </div>
-            :
-            ( route === 'login'
-              ? <Login onRouteChange={this.onRouteChange} />
-              : <Register onRouteChange={this.onRouteChange} />
-            )
-        }
+        <Router>
+          <Switch>
+            <Route exact path='/' render={() => (
+              <div>
+                <Logo />
+                <Rank name={user.name} entries={user.entries} />
+                <ImageLinkForm inputChange={this.onInputChange} submit={this.onSubmit} />
+                <FaceRecognition box={box} imageUrl={imageUrl} />
+              </div>
+            )} />
+            <Route path='/login' render={() => (
+              <Login loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+            )} />
+            <Route path='/register' render={() => (
+              <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+            )} />
+          </Switch>
+        </Router>
       </div>
     );
   }

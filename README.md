@@ -2,8 +2,8 @@
 
 **Technologies Used**
 1. React
-2. Clarifai API
+2. React Router
+3. Clarifai API
 
 **Upcoming Changes**
-* Implement React Router
 * Clean up / optimize code (particularly CSS)
