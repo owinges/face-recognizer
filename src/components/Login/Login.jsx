@@ -42,46 +42,44 @@ class Login extends Component {
 
     render () {
         return (
-            <article className='br3 ba b--black-10 mv4 w-100 w-50-m w-25-1 mw6 shadow-5 center' style={{ textAlign: 'center' }}>
-                <main className="pa4 black-80">
-                    <form className="measure">
-                        <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-                            <legend className="f1 fw6 ph0 mh0">Log In</legend>
-                            <div className="mt3">
-                                <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
-                                <input
-                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    type="email"
-                                    name="email-address"
-                                    id="email-address"
-                                    onChange={this.onEmailChange}
-                                />
-                            </div>
-                            <div className="mv3">
-                                <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
-                                <input
-                                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    type="password"
-                                    name="password"
-                                    id="password"
-                                    onChange={this.onPasswordChange}
-                                />
-                            </div>
-                        </fieldset>
-                        <div className="">
+            <main className='br3 ba b--black-10 mv4 w-100 w-50-m w-25-1 mw6 shadow-5 center tc'>
+                <form className="pa4 black-80">
+                    <fieldset id="log-in" className="ba b--transparent ph0 mh0">
+                        <legend className="f1 fw6 ph0 mh0">Log In</legend>
+                        <div className="mt3">
+                            <label className="db fw6 lh-copy f6" htmlFor="email">Email</label>
                             <input
-                                onClick={this.onSubmitLogin}
-                                className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-                                type="submit"
-                                value="Sign in"
+                                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                type="email"
+                                name="email"
+                                id="email"
+                                onChange={this.onEmailChange}
                             />
                         </div>
-                        <div className="lh-copy mt3">
-                            <Link to='/register' className="f6 link dim black db pointer">Register</Link>
+                        <div className="mv3">
+                            <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
+                            <input
+                                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                type="password"
+                                name="password"
+                                id="password"
+                                onChange={this.onPasswordChange}
+                            />
                         </div>
-                    </form>
-                </main>
-            </article>
+                    </fieldset>
+                    <div>
+                        <input
+                            onClick={this.onSubmitLogin}
+                            className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+                            type="submit"
+                            value="Sign in"
+                        />
+                    </div>
+                    <div className="lh-copy mt3">
+                        <Link to='/register' className="f6 link dim black db pointer">Register</Link>
+                    </div>
+                </form>
+            </main>
         );
     }
 }

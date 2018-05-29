@@ -3,18 +3,20 @@ import { Link } from 'react-router-dom';
 
 const Navigation = ({ isLoggedIn }) => {
     return (
-        <div class="w-100 ph3 pv3 pv4-ns ph4-m ph5-l">
-            <nav className="f6 fw6 ttu tracked tr">
-                {isLoggedIn ? (
-                    <Link to='/login' className='f3 dim black underline pa3'>Log Out</Link>
-                ) : (
-                        <div>
-                            <Link to='/login' className='f3 dim black underline pa3'>Log In</Link>
-                            <Link to='/register' className='f3 dim black underline pa3'>Register</Link>
-                        </div>
+        <nav className="navbar is-primary">
+            <div className="navbar-menu">
+                <div className="navbar-end">
+                    {isLoggedIn ? (
+                        <Link to='/login' className='navbar-item'>Log Out</Link>
+                    ) : (
+                        <React.Fragment>
+                            <Link to='/login' className='navbar-item'>Log In</Link>
+                            <Link to='/register' className='navbar-item'>Register</Link>
+                        </React.Fragment>
                     )}
-            </nav>
-        </div>
+                </div>
+            </div>
+        </nav>
     );
 }
 

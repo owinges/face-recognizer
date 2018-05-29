@@ -133,24 +133,24 @@ export default class App extends Component {
         <Router>
           <Switch>
             <Route exact path='/' render={() => isLoggedIn ? (
-              <div>
+              <React.Fragment>
                 <Navigation isLoggedIn={isLoggedIn} />
                 <Rank name={user.name} entries={user.entries} />
                 <ImageLinkForm inputChange={this.onInputChange} submit={this.onSubmit} />
                 <FaceRecognition boxes={boxes} imageUrl={imageUrl} />
-              </div>
+              </React.Fragment>
             ) : <Redirect to='/login' />} />
             <Route path='/login' render={() => (
-              <div>
+              <React.Fragment>
                 <Navigation isLoggedIn={isLoggedIn} />
                 <Login clearUser={this.clearUser} loadUser={this.loadUser} />
-              </div>
+              </React.Fragment>
             )} />
             <Route path='/register' render={() => (
-              <div>
+              <React.Fragment>
                 <Navigation isLoggedIn={isLoggedIn} />
                 <Register loadUser={this.loadUser} />
-              </div>
+              </React.Fragment>
             )} />
           </Switch>
         </Router>
