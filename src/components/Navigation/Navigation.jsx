@@ -1,27 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Logo from '../Logo/Logo';
-
 const Navigation = ({ isLoggedIn }) => {
-    if (isLoggedIn) {
-        return (
-            <nav style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Logo />
-                <Link to='/login' className='f3 link dim black underline pa3 pointer'>Log Out</Link>
+    return (
+        <div class="w-100 ph3 pv3 pv4-ns ph4-m ph5-l">
+            <nav className="f6 fw6 ttu tracked tr">
+                {isLoggedIn ? (
+                    <Link to='/login' className='f3 dim black underline pa3'>Log Out</Link>
+                ) : (
+                        <div>
+                            <Link to='/login' className='f3 dim black underline pa3'>Log In</Link>
+                            <Link to='/register' className='f3 dim black underline pa3'>Register</Link>
+                        </div>
+                    )}
             </nav>
-        );
-    } else {
-        return (
-            <nav style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Logo />
-                <div style={{ textAlign: 'center' }}>
-                    <Link to='/login' className='f3 link dim black underline pa3 pointer'>Log In</Link>
-                <Link to='/register' className='f3 link dim black underline pa3 pointer'>Register</Link>
-                </div>
-            </nav>
-        );
-    }
+        </div>
+    );
 }
 
 export default Navigation;

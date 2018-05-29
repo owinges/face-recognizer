@@ -12,15 +12,15 @@ const particlesOptions = {
             }
         }
     },
-    interactivity: {
-        detect_on: 'canvas',
-        events: {
-            onhover: {
-                enable: true,
-                mode: 'repulse'
-            }
-        }
-    },
+    // interactivity: {
+    //     detect_on: 'canvas',
+    //     events: {
+    //         onhover: {
+    //             enable: true,
+    //             mode: 'repulse'
+    //         }
+    //     }
+    // },
     line_linked: {
         shadow: {
             enable: true,

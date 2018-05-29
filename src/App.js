@@ -128,7 +128,7 @@ export default class App extends Component {
     const { isLoggedIn, imageUrl, boxes, user } = this.state;
     
     return (
-      <div>
+      <React.Fragment>
         <Background />
         <Router>
           <Switch>
@@ -154,7 +154,7 @@ export default class App extends Component {
             )} />
           </Switch>
         </Router>
-      </div>
+      </React.Fragment>
     );
   }
 }
