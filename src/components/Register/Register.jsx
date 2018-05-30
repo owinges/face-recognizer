@@ -44,53 +44,69 @@ class Register extends Component {
 
     render() {
         return (
-            <article className='br3 ba b--black-10 mv4 w-100 w-50-m w-25-1 mw6 shadow-5 center' style={{ textAlign: 'center' }}>
-                <main className="pa4 black-80">
-                    <form className="measure">
-                        <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-                            <legend className="f1 fw6 ph0 mh0">Register</legend>
-                            <div className="mt3">
-                                <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
-                                <input
-                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    type='name'
-                                    name='name'
-                                    id='name'
-                                    onChange={this.onNameChange}
-                                />
-                            </div>
-                            <div className="mt3">
-                                <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
-                                <input
-                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    type="email"
-                                    name="email-address"
-                                    id="email-address"
-                                    onChange={this.onEmailChange}
-                                />
-                            </div>
-                            <div className="mv3">
-                                <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
-                                <input
-                                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    type="password"
-                                    name="password"
-                                    id="password"
-                                    onChange={this.onPasswordChange}
-                                />
-                            </div>
-                        </fieldset>
-                        <div className="">
-                            <input
-                                onClick={this.onSubmitRegister}
-                                className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-                                type="submit"
-                                value="Register"
-                            />
+            <section className='section'>
+                <div className='container'>
+                    <div className='card'>
+                        <div className='card-body has-text-centered has-text-black'>
+                            <form>
+                                <h1 className='is-size-1 has-text-weight-semibold mb2'>Register</h1>
+
+                                <div className="field">
+                                    <label className="label" htmlFor='name'>Name</label>
+                                    <div className="control has-icons-left">
+                                        <input
+                                            className="input"
+                                            type="name"
+                                            id='name'
+                                            placeholder="Enter your first name"
+                                            onChange={this.onNameChange}
+                                        />
+                                        <span className="icon is-small is-left">
+                                            <i className="fas fa-user"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="field">
+                                    <label className="label" htmlFor='email'>Email</label>
+                                    <div className="control has-icons-left">
+                                        <input
+                                            className="input"
+                                            type="email"
+                                            id='email'
+                                            placeholder="Enter your email address"
+                                            onChange={this.onEmailChange}
+                                        />
+                                        <span className="icon is-small is-left">
+                                            <i className="fas fa-envelope"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="field">
+                                    <label className="label" htmlFor='password'>Password</label>
+                                    <div className="control has-icons-left">
+                                        <input
+                                            className="input"
+                                            type="password"
+                                            placeholder="Enter your password"
+                                            id='password'
+                                            onChange={this.onPasswordChange}
+                                        />
+                                        <span className="icon is-small is-left">
+                                            <i className="fas fa-lock"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <button className='button is-large is-black is-outlined mt2' onClick={this.onSubmitRegister}>
+                                    Register
+                                </button>
+                            </form>
                         </div>
-                    </form>
-                </main>
-            </article>
+                    </div>
+                </div>
+            </section>
         );
     }
 }

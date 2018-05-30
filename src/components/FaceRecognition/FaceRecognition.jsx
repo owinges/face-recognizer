@@ -22,11 +22,17 @@ export default class FaceRecognition extends Component {
 
     render () {
         const { boxes, imageUrl } = this.props;
+
         return (
-            <div className='center ma'>
-                <div className='absolute mt2'>
-                    <img id='inputImage' src={imageUrl} alt='' width='500px' height='auto'/>
-                    {this.displayFaceBoxes(boxes)}
+            <div className='container'>
+                <div className='face-recognition-box has-text-centered'>
+                    <div className='image'>
+                        <img id='inputImage' src={imageUrl} alt='' />
+                        {this.displayFaceBoxes(boxes)}
+                    </div>
+                    <p className='is-size-4'>
+                        Enter an image URL below and I will detect faces in the picture!
+                    </p>
                 </div>
             </div>
         );

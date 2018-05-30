@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 
-import Navigation from '../Navigation/Navigation';
-
 class Login extends Component {
     constructor (props) {
         super(props);
@@ -44,7 +42,7 @@ class Login extends Component {
 
     render () {
         return (
-            <section className='hero-body'>
+            <section className='section'>
                 <div className='container'>
                     <div className='card'>
                         <div className='card-body has-text-centered has-text-black'>

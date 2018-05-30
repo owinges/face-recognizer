@@ -11,3 +11,29 @@
     justify-content: center;
     cursor: pointer;
 }
+
+.is-horizontal-center {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.face-recognition-card {
+    height: 497px;
+    width: 700px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: .5rem;
+    box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    background: transparent;
+}
+
+.image {
+    max-height: 400px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.image img {
+    vertical-align: middle;
+}

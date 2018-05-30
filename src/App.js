@@ -29,6 +29,7 @@ export default class App extends Component {
       imageUrl: '',
       boxes: [],
       isLoggedIn: false,
+      displayRank: false,
       user: {
         id: '',
         name: '',
@@ -91,6 +92,14 @@ export default class App extends Component {
     this.setState({ boxes });
   }
 
+  toggleRank = () => {
+    console.log(this.state.displayRank);
+    this.setState({
+      displayRank: !this.state.displayRank
+    });
+    console.log(this.state.displayRank);
+  }
+
   onInputChange = (event) => {
     this.setState({ input: event.target.value });
   }
@@ -116,6 +125,7 @@ export default class App extends Component {
               joined: this.state.user.joined
             }
           });
+          this.toggleRank();
         })
         .catch(error => console.log(error))
       }
@@ -125,36 +135,31 @@ export default class App extends Component {
   }
 
   render () {
-    const { isLoggedIn, imageUrl, boxes, user } = this.state;
+    const { isLoggedIn, imageUrl, boxes, user, displayRank } = this.state;
     
     return (
-      <main className='hero is-fullheight'>
-        <Background />
+      <main className='full-height'>
         <Router>
-          <Switch>
-            <Route exact path='/' render={() => isLoggedIn ? (
-              <React.Fragment>
-                <Navigation isLoggedIn={isLoggedIn} />
-                <Rank name={user.name} entries={user.entries} />
-                <ImageLinkForm inputChange={this.onInputChange} submit={this.onSubmit} />
-                <FaceRecognition boxes={boxes} imageUrl={imageUrl} />
-              </React.Fragment>
-            ) : <Redirect to='/login' />} />
-            <Route path='/login' render={() => (
-              <React.Fragment>
-                <Navigation isLoggedIn={isLoggedIn} />
+          <React.Fragment>
+            {/* <Background /> */}
+            <Navigation isLoggedIn={isLoggedIn} />
+            <Switch>
+              <Route exact path='/' render={() => isLoggedIn ? (
+                <section className='section'>
+                  <FaceRecognition boxes={boxes} imageUrl={imageUrl} />
+                  <ImageLinkForm inputChange={this.onInputChange} submit={this.onSubmit} />
+                </section>
+              ) : <Redirect to='/login' />} />
+              <Route path='/login' render={() => (
                 <Login clearUser={this.clearUser} loadUser={this.loadUser} />
-              </React.Fragment>
-            )} />
-            <Route path='/register' render={() => (
-              <React.Fragment>
-                <Navigation isLoggedIn={isLoggedIn} />
+              )} />
+              <Route path='/register' render={() => (
                 <Register loadUser={this.loadUser} />
-              </React.Fragment>
-            )} />
-          </Switch>
+              )} />
+            </Switch>
+            <Rank toggleRank={this.toggleRank} displayRank={displayRank} entries={user.entries} />
+          </React.Fragment>
         </Router>
-        <div className='hero-foot'></div>
       </main>
     );
   }

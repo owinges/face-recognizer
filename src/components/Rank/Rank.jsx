@@ -1,15 +1,18 @@
 import React from 'react';
 
-const Rank = ({ name, entries }) => {
+import './Rank.css';
+
+const Rank = ({ toggleRank, displayRank, entries }) => {
     return (
-        <div className='center'>
-            <div className='white f3'>
-                {`${name}, your current entry count is...`}
+        <article className={displayRank ? 'message' : 'message invisible'}>
+            <div className="message-header">
+                <p>Entry count increased!</p>
+                <button className="delete" onClick={toggleRank}></button>
             </div>
-            <div className='white f1'>
-                {entries}
+            <div className="message-body">
+                {`Your current entry count is ${entries}!`}
             </div>
-        </div>
+        </article>
     );
 }
 
