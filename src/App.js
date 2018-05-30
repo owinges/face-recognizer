@@ -128,7 +128,7 @@ export default class App extends Component {
     const { isLoggedIn, imageUrl, boxes, user } = this.state;
     
     return (
-      <React.Fragment>
+      <main className='hero is-fullheight'>
         <Background />
         <Router>
           <Switch>
@@ -154,7 +154,8 @@ export default class App extends Component {
             )} />
           </Switch>
         </Router>
-      </React.Fragment>
+        <div className='hero-foot'></div>
+      </main>
     );
   }
 }
