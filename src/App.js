@@ -72,8 +72,10 @@ export default class App extends Component {
   calculateFaceLocation = (response) => {
     const clarifaiFaces = response.data.outputs[0].data.regions;
     const image = document.getElementById('inputImage');
-    const width = Number(image.width);
-    const height = Number(image.height);
+    const width = Number(image.clientWidth);
+    const height = Number(image.clientHeight);
+    console.log(width);
+    console.log(height);
     let output = [];
 
     clarifaiFaces.map(face => {
@@ -146,8 +148,8 @@ export default class App extends Component {
             <Switch>
               <Route exact path='/' render={() => isLoggedIn ? (
                 <section className='section'>
-                  <FaceRecognition boxes={boxes} imageUrl={imageUrl} />
                   <ImageLinkForm inputChange={this.onInputChange} submit={this.onSubmit} />
+                  <FaceRecognition boxes={boxes} imageUrl={imageUrl} />
                 </section>
               ) : <Redirect to='/login' />} />
               <Route path='/login' render={() => (
@@ -157,7 +159,9 @@ export default class App extends Component {
                 <Register loadUser={this.loadUser} />
               )} />
             </Switch>
-            <Rank toggleRank={this.toggleRank} displayRank={displayRank} entries={user.entries} />
+            <footer className='footer'>
+              <Rank toggleRank={this.toggleRank} displayRank={displayRank} entries={user.entries} />
+            </footer>
           </React.Fragment>
         </Router>
       </main>

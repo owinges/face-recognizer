@@ -24,15 +24,15 @@ export default class FaceRecognition extends Component {
         const { boxes, imageUrl } = this.props;
 
         return (
-            <div className='container'>
+            <div className='container is-horizontal-center'>
                 <div className='face-recognition-box has-text-centered'>
-                    <div className='image'>
+                    <p className='is-size-4'>
+                        Enter an image URL above and I will detect faces in the picture!
+                    </p>
+                    <figure className='image'>
                         <img id='inputImage' src={imageUrl} alt='' />
                         {this.displayFaceBoxes(boxes)}
-                    </div>
-                    <p className='is-size-4'>
-                        Enter an image URL below and I will detect faces in the picture!
-                    </p>
+                    </figure>
                 </div>
             </div>
         );
