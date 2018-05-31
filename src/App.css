@@ -20,11 +20,6 @@ form {
   padding: 3rem;
 }
 
-.full-height {
-  min-height: 100vh;
-  max-height: 100%;
-}
-
 .navbar, .footer {
   background: transparent;
 }

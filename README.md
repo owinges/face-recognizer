@@ -6,7 +6,7 @@ The front end is made with React while the back end is handled by Express. The d
 
 The app is hosted on Heroku and can be viewed at: https://dry-inlet-52104.herokuapp.com/
 
-**Technologies Used**
+**Main Technologies Used**
 1. React
 2. React Router
 3. Clarifai API
@@ -16,7 +16,7 @@ The app is hosted on Heroku and can be viewed at: https://dry-inlet-52104.heroku
 7. Express
 
 **Changes Currently In Progress**
-* Implement the Bulma CSS framework and remove Tachyons entirely.
+* Implement custom styling with Styled Components and remove Tachyons entirely.
 * Improve styling of all components, particularly the Face Recognition and Image Link Form components.
 
 **Upcoming Changes**

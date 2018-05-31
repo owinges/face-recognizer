@@ -6,6 +6,7 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom';
+import styled from 'styled-components';
 import axios from 'axios';
 
 // Custom components
@@ -19,6 +20,13 @@ import Register from './components/Register/Register';
 
 // Other imports
 import './App.css';
+
+// Styled components
+
+const Wrapper = styled.main`
+  min-height: 100vh;
+  max-height: 100%;
+`;
 
 export default class App extends Component {
   constructor () {
@@ -140,7 +148,7 @@ export default class App extends Component {
     const { isLoggedIn, imageUrl, boxes, user, displayRank } = this.state;
     
     return (
-      <main className='full-height'>
+      <Wrapper>
         <Router>
           <React.Fragment>
             {/* <Background /> */}
@@ -164,7 +172,7 @@ export default class App extends Component {
             </footer>
           </React.Fragment>
         </Router>
-      </main>
+      </Wrapper>
     );
   }
 }
