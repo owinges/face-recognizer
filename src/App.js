@@ -32,6 +32,12 @@ const Section = styled.section`
   padding: 3rem 1.5rem;
 `;
 
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
 export default class App extends Component {
   constructor () {
     super();
@@ -82,6 +88,7 @@ export default class App extends Component {
   }
 
   calculateFaceLocation = (response) => {
+    console.log(response); // FOR DEBUGGING, TO BE DELETED
     const clarifaiFaces = response.data.outputs[0].data.regions;
     const image = document.getElementById('inputImage');
     const width = Number(image.clientWidth);
@@ -95,10 +102,24 @@ export default class App extends Component {
         leftCol: face.region_info.bounding_box.left_col * width,
         topRow: face.region_info.bounding_box.top_row * height,
         rightCol: width - (face.region_info.bounding_box.right_col * width),
-        bottomRow: height - (face.region_info.bounding_box.bottom_row * height)   
+        bottomRow: height - (face.region_info.bounding_box.bottom_row * height),
+        data: {
+          age: face.data.face.age_appearance.concepts[0].name,
+          genderAppearance: {
+            strong: {
+              name: face.data.face.gender_appearance.concepts[0].name,
+              percentage: face.data.face.gender_appearance.concepts[0].value
+            },
+            weak: {
+              name: face.data.face.gender_appearance.concepts[1].name,
+              percentage: face.data.face.gender_appearance.concepts[1].value
+            }
+          }
+        }
       });
     })
 
+    console.log(output); // FOR DEBUGGING, TO BE DELETED
     return output;
   }
 
@@ -160,8 +181,10 @@ export default class App extends Component {
             <Switch>
               <Route exact path='/' render={() => isLoggedIn ? (
                 <Section>
-                  <ImageLinkForm inputChange={this.onInputChange} submit={this.onSubmit} />
-                  <FaceRecognition boxes={boxes} imageUrl={imageUrl} />
+                  <Container>
+                    <FaceRecognition boxes={boxes} imageUrl={imageUrl} />
+                    <ImageLinkForm inputChange={this.onInputChange} submit={this.onSubmit} />
+                  </Container>
                 </Section>
               ) : <Redirect to='/login' />} />
               <Route path='/login' render={() => (

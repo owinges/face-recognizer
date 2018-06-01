@@ -25,7 +25,7 @@
     /* border: 1px solid rgba(0, 0, 0, 0.2); */
     /* border-radius: .5rem; */
     /* box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.2); */
-    margin: 0 auto;
+    /* margin: 0 auto; */
     /* background: transparent; */
 }
 
@@ -36,8 +36,8 @@
 
 .image {
     /* height: 400px; */
-    width: 600px;
-    margin: 0 auto;
+    /* width: 600px; */
+    /* margin: 0 auto; */
 }
 
 .image img {
