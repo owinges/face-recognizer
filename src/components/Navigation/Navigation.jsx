@@ -19,7 +19,7 @@ const NavbarEnd = styled.div`
 
 const NavLink = styled(Link)`
     align-items: center;
-    color: #4a4a4a;
+    color: #0a0a0a;
     height: 100%;
     display: flex;
     line-height: 1.5;

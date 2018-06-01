@@ -28,6 +28,10 @@ const Wrapper = styled.main`
   max-height: 100%;
 `;
 
+const Section = styled.section`
+  padding: 3rem 1.5rem;
+`;
+
 export default class App extends Component {
   constructor () {
     super();
@@ -155,16 +159,20 @@ export default class App extends Component {
             <Navigation isLoggedIn={isLoggedIn} />
             <Switch>
               <Route exact path='/' render={() => isLoggedIn ? (
-                <section className='section'>
+                <Section>
                   <ImageLinkForm inputChange={this.onInputChange} submit={this.onSubmit} />
                   <FaceRecognition boxes={boxes} imageUrl={imageUrl} />
-                </section>
+                </Section>
               ) : <Redirect to='/login' />} />
               <Route path='/login' render={() => (
-                <Login clearUser={this.clearUser} loadUser={this.loadUser} />
+                <Section>
+                  <Login clearUser={this.clearUser} loadUser={this.loadUser} />
+                </Section>
               )} />
               <Route path='/register' render={() => (
-                <Register loadUser={this.loadUser} />
+                <Section>
+                  <Register loadUser={this.loadUser} />
+                </Section>
               )} />
             </Switch>
             <footer className='footer'>
