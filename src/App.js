@@ -33,8 +33,10 @@ const Section = styled.section`
 `;
 
 const Container = styled.div`
+  align-items: center;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
   justify-content: center;
 `;
 
@@ -93,8 +95,6 @@ export default class App extends Component {
     const image = document.getElementById('inputImage');
     const width = Number(image.clientWidth);
     const height = Number(image.clientHeight);
-    console.log(width);
-    console.log(height);
     let output = [];
 
     clarifaiFaces.map(face => {

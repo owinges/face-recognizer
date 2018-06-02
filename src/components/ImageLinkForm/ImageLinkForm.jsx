@@ -3,11 +3,31 @@ import styled from 'styled-components';
 
 const Column = styled.div`
     display: flex;
-    height: 600px;
-    flex-wrap: wrap;
     justify-content: space-between;
-    margin-left: 1rem;
-    width: 500px;
+    width: 600px;
+
+    /* Full HD desktop */
+    @media (min-width: 900px) and (min-height: 800px) {
+        width: 700px;
+    }
+
+    /* Desktop */
+    @media (max-width: 700px) {
+        width: 500px;
+    }
+
+    @media (max-width: 600px) {
+        width: 400px;
+    }
+
+    @media (max-width: 500px) {
+        width: 300px;
+    }
+
+    /* Mobile landscape */
+    @media (max-width: 700px) and (max-height: 500px) {
+        width: 300px;
+    }
 `;
 
 const Form = styled.div`
@@ -20,7 +40,8 @@ const Form = styled.div`
 const Input = styled.input`
     background-color: transparent;
     border: 1px solid #0a0a0a;
-    border-top-left-radius: .4rem;
+    border-bottom-left-radius: .4rem;
+    border-right: 0;
     box-shadow: 0 1px 2px rgba(10, 10, 10, 0.1);
     color: #0a0a0a;
     display: flex;
@@ -34,7 +55,7 @@ const Input = styled.input`
 const Button = styled.button`
     background-color: transparent;
     border: 1px solid #0a0a0a;
-    border-top-right-radius: .4rem;
+    border-bottom-right-radius: .4rem;
     color: #0a0a0a;
     cursor: pointer;
     display: flex;
@@ -48,16 +69,6 @@ const Button = styled.button`
     }
 `;
 
-const ResultsBox = styled.div`
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-bottom-left-radius: .4rem;
-    border-bottom-right-radius: .4rem;
-    box-shadow: 4px 4px 8px 0px rgba( 0, 0, 0, 0.2 );
-    display: flex;
-    height: 552px;
-    width: 100%;
-`;
-
 const ImageLinkForm = ({ inputChange, submit }) => {
     return (
         <Column>
@@ -65,9 +76,6 @@ const ImageLinkForm = ({ inputChange, submit }) => {
                 <Input type='text' onChange={inputChange} />
                 <Button onClick={submit}>Detect</Button>
             </Form>
-            <ResultsBox>
-                <p>Enter an image URL above and I will detect faces in the picture!</p>
-            </ResultsBox>
         </Column>
     );
 }
