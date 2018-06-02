@@ -9,12 +9,18 @@ const Navbar = styled.nav`
     justify-content: space-between;
 `;
 
-const NavbarBrand = styled.div`
+const NavbarStart = styled.div`
+    display: flex;
+    justify-content: flex-start;
 `;
 
 const NavbarEnd = styled.div`
     display: flex;
     justify-content: flex-end;
+`;
+
+const NavBrand = styled.div`
+    padding: .5rem .75rem;
 `;
 
 const NavLink = styled(Link)`
@@ -34,9 +40,11 @@ const NavLink = styled(Link)`
 const Navigation = ({ isLoggedIn }) => {
     return (
         <Navbar>
-            <NavbarBrand>
-                <Logo />
-            </NavbarBrand>
+            <NavbarStart>
+                <NavBrand>
+                    <Logo />
+                </NavBrand>
+            </NavbarStart>
             <NavbarEnd>
                 {isLoggedIn ? (
                     <NavLink to='/login'>Log Out</NavLink>
