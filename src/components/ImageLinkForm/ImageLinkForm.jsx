@@ -7,25 +7,25 @@ const Column = styled.div`
     width: 600px;
 
     /* Full HD desktop */
-    @media (min-width: 900px) and (min-height: 800px) {
+    @media screen and (min-width: 900px) and (min-height: 800px) {
         width: 700px;
     }
 
     /* Desktop */
-    @media (max-width: 700px) {
+    @media screen and (max-width: 700px) {
         width: 500px;
     }
 
-    @media (max-width: 600px) {
+    @media screen and (max-width: 600px) {
         width: 400px;
     }
 
-    @media (max-width: 500px) {
+    @media screen and (max-width: 500px) {
         width: 300px;
     }
 
     /* Mobile landscape */
-    @media (max-width: 700px) and (max-height: 500px) {
+    @media screen and (max-width: 700px) and (max-height: 500px) {
         width: 300px;
     }
 `;

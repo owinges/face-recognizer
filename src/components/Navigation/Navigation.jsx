@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Logo from '../Logo/Logo';
+import brain from './brain.png';
 
 const Navbar = styled.nav`
+    background-color: #FE5F00;
     display: flex;
-    height: 56px;
+    height: 80px;
     justify-content: space-between;
 `;
 
@@ -20,20 +21,21 @@ const NavbarEnd = styled.div`
 `;
 
 const NavBrand = styled.div`
-    padding: .5rem .75rem;
+    padding: .5rem 1rem;
 `;
 
 const NavLink = styled(Link)`
     align-items: center;
-    color: #0a0a0a;
-    height: 100%;
+    color: #172A3A;
     display: flex;
+    font-size: 2rem;
+    height: 100%;
     line-height: 1.5;
-    padding: 0 .75rem;
+    padding: 0 2rem;
     position: relative;
 
     &:hover {
-        background-color: #fafafa;
+        background-color: #F49F0A;
     }
 `;
 
@@ -42,7 +44,7 @@ const Navigation = ({ isLoggedIn }) => {
         <Navbar>
             <NavbarStart>
                 <NavBrand>
-                    <Logo />
+                    <img src={brain} alt='Brain logo' />
                 </NavBrand>
             </NavbarStart>
             <NavbarEnd>
