@@ -17,7 +17,6 @@ The app is hosted on Heroku and can be viewed at: https://dry-inlet-52104.heroku
 8. Express
 
 **Changes Currently In Progress**
-* Implement custom styling with Styled Components and remove Tachyons entirely.
 * Improve styling of all components, particularly the Face Recognition and Image Link Form components.
 * Expand app to also include the estimated age of each face recognized. Display ages above the faces.
 

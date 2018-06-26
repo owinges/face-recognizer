@@ -10,13 +10,12 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 // Custom components
+import Auth from './components/Auth/Auth';
 import Background from './components/Background/Background';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
-import Login from './components/Login/Login';
 import Navigation from './components/Navigation/Navigation';
 import Rank from './components/Rank/Rank';
-import Register from './components/Register/Register';
 
 // Other imports
 import './App.css';
@@ -186,15 +185,16 @@ export default class App extends Component {
                     <ImageLinkForm inputChange={this.onInputChange} submit={this.onSubmit} />
                   </Container>
                 </Section>
-              ) : <Redirect to='/login' />} />
-              <Route path='/login' render={() => (
+              ) : <Redirect to='/auth' />} />
+              <Route path='/login'>
+                <Redirect to='/auth/login'/>
+              </Route>
+              <Route path='/register'>
+                <Redirect to='/auth/register' />
+              </Route>
+              <Route path='/auth/:id' render={() => (
                 <Section>
-                  <Login clearUser={this.clearUser} loadUser={this.loadUser} />
-                </Section>
-              )} />
-              <Route path='/register' render={() => (
-                <Section>
-                  <Register loadUser={this.loadUser} />
+                  <Auth clearUser={this.clearUser} loadUser={this.loadUser} />
                 </Section>
               )} />
             </Switch>

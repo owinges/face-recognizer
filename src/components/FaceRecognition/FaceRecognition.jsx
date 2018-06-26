@@ -61,6 +61,8 @@ const Image = styled.figure`
     img {
         display: block;
         margin: 0 auto;
+        height: 100%;
+        width: 100%;
     }
 `;
 
