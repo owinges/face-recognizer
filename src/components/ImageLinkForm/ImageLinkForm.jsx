@@ -4,30 +4,7 @@ import styled from 'styled-components';
 const Column = styled.div`
     display: flex;
     justify-content: space-between;
-    width: 600px;
-
-    /* Full HD desktop */
-    @media screen and (min-width: 900px) and (min-height: 800px) {
-        width: 700px;
-    }
-
-    /* Desktop */
-    @media screen and (max-width: 700px) {
-        width: 500px;
-    }
-
-    @media screen and (max-width: 600px) {
-        width: 400px;
-    }
-
-    @media screen and (max-width: 500px) {
-        width: 300px;
-    }
-
-    /* Mobile landscape */
-    @media screen and (max-width: 700px) and (max-height: 500px) {
-        width: 300px;
-    }
+    width: 90vw;
 `;
 
 const Form = styled.div`

@@ -28,3 +28,7 @@ article {
   position: fixed;
   bottom: 0;
 }
+
+::placeholder {
+  color: black;
+}

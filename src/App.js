@@ -185,9 +185,9 @@ export default class App extends Component {
                     <ImageLinkForm inputChange={this.onInputChange} submit={this.onSubmit} />
                   </Container>
                 </Section>
-              ) : <Redirect to='/auth' />} />
+              ) : <Redirect to='/auth/login' />} />
               <Route path='/login'>
-                <Redirect to='/auth/login'/>
+                <Redirect to='/auth/login' />
               </Route>
               <Route path='/register'>
                 <Redirect to='/auth/register' />

@@ -1,52 +1,18 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import styled from 'styled-components';
 import axios from 'axios';
 
 import Login from './Login/Login';
 import Register from './Register/Register';
 
-const Container = styled.div`
-    display: flex;
-    justify-content: space-around;
-`;
-
-const Card = styled.div`
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: .5rem;
-    box-shadow: 4px 4px 8px 0px rgba( 0, 0, 0, 0.2 );
-    color: #0a0a0a;
-    margin-top: 10vh;
-    overflow: hidden;
-    text-align: center;
-    width: 500px;
-`;
-
-const CardHead = styled.div`
-    display: flex;
-`;
-
-const Tab = styled.div`
-    align-items: center;
-    background-color: orange;
-    cursor: pointer;
-    display: flex;
-    font-size: 2rem;
-    height: 6rem;
-    justify-content: center;
-    width: 50%;
-
-    &:hover {
-        background-color: darkorange;
-    }
-`;
+import { Container, Card, CardHead, Tab } from '../StyledComponents/Auth';
 
 class Auth extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            auth: this.props.match.params.id ? this.props.match.params.id : 'login',
+            auth: this.props.match.params.id,
             email: '',
             name: '',
             password: ''
@@ -113,8 +79,14 @@ class Auth extends Component {
             <Container>
                 <Card>
                     <CardHead>
-                        <Tab onClick={() => { this.authChange('login') }}>LOGIN</Tab>
-                        <Tab onClick={() => { this.authChange('register') }}>REGISTER</Tab>
+                        <Tab
+                            color={auth === 'login' ? 'active' : ''}
+                            onClick={() => { this.authChange('login') }}
+                        >LOGIN</Tab>
+                        <Tab
+                            color={auth === 'register' ? 'active' : ''}
+                            onClick={() => { this.authChange('register') }}
+                        >REGISTER</Tab>
                     </CardHead>
                     {auth === 'login' ? (
                         <Login

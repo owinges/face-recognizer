@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import brain from './brain.png';
 
 const Navbar = styled.nav`
-    background-color: #FE5F00;
+    background-color: ${props => props.theme.primary};
     display: flex;
     height: 80px;
     justify-content: space-between;
@@ -35,7 +35,7 @@ const NavLink = styled(Link)`
     position: relative;
 
     &:hover {
-        background-color: #F49F0A;
+        background-color: ${props => props.theme.secondary};
     }
 `;
 
