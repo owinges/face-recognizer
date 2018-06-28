@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 const Column = styled.div`
     display: flex;
-    height: 70vh;
+    height: 600px;
     justify-content: space-around;
-    width: 90vw;
+    width: 900px;
 `;
 
 const FaceRecognitionBox = styled.div`
@@ -26,15 +26,14 @@ const Image = styled.figure`
     align-items: center;
     display: flex;
     justify-content: center;
-    overflow: scroll;
     position: relative;
-    height: 100%;
-    width: 100%;
+    /* height: 100%; */
+    /* width: 100%; */
     img {
-        height: auto;
+        /* height: auto; */
         width: auto;
-        max-height: 80%;
-        max-width: 80%;
+        max-height: 500px;
+        max-width: 800px;
     }
 `;
 
@@ -42,19 +41,29 @@ const BoundingBox = styled.div`
     position: absolute;
     /* box-shadow: 0 0 0 3px #149df2 inset; */
     box-shadow: 0 0 0 3px ${props => props.theme.primary} inset;
+    cursor: default;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    top: ${props => props.sides.top}px;
+    right: ${props => props.sides.right}px;
+    bottom: ${props => props.sides.bottom}px;
+    left: ${props => props.sides.left}px;
+    opacity: .5;
+    &:hover {
+        opacity: 1;
+    }
 `;
 
 const AgeBox = styled.span`
     background-color: ${props => props.theme.primary};
-    border-radius: 10rem;
+    border-radius: .5rem;
     color: black;
-    display: inline-block;
-    padding: 1rem 2rem;
+    height: 2.5rem;
+    padding: .5rem 2rem;
     position: relative;
-    top: -5rem;
+    top: -4rem;
+    z-index: 1000;
 `;
 
 export default class FaceRecognition extends Component {
@@ -62,7 +71,7 @@ export default class FaceRecognition extends Component {
         return boxes.map((box, index) => {
             return (                    
                 <BoundingBox
-                    style={{
+                    sides={{
                         top: box.topRow,
                         right: box.rightCol,
                         bottom: box.bottomRow,
@@ -70,7 +79,7 @@ export default class FaceRecognition extends Component {
                     }}
                     key={index}
                 >
-                    <AgeBox>{box.data.age} Years Old</AgeBox>
+                    <AgeBox>{box.data.age} years old</AgeBox>
                 </BoundingBox>
             );
         })

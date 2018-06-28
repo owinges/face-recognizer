@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Column = styled.div`
     display: flex;
     justify-content: space-between;
-    width: 90vw;
+    width: 900px;
 `;
 
 const Form = styled.div`

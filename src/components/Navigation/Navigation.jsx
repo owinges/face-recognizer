@@ -6,7 +6,7 @@ import brain from './brain.png';
 const Navbar = styled.nav`
     background-color: ${props => props.theme.primary};
     display: flex;
-    height: 80px;
+    height: 6rem;
     justify-content: space-between;
 `;
 
@@ -22,6 +22,10 @@ const NavbarEnd = styled.div`
 
 const NavBrand = styled.div`
     padding: .5rem 1rem;
+    height: 100%;
+    img {
+        height: 100%;
+    }
 `;
 
 const NavLink = styled(Link)`
