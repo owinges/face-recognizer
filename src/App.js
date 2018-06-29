@@ -39,6 +39,14 @@ const Container = styled.div`
   justify-content: center;
 `;
 
+const Footer = styled.footer`
+  background-color: ${props => props.theme.primary};
+  bottom: 0;
+  height: 6rem;
+  position: absolute;
+  width: 100%;
+`;
+
 export default class App extends Component {
   constructor () {
     super();
@@ -198,9 +206,9 @@ export default class App extends Component {
                 </Section>
               )} />
             </Switch>
-            <footer className='footer'>
+            <Footer>
               <Rank toggleRank={this.toggleRank} displayRank={displayRank} entries={user.entries} />
-            </footer>
+            </Footer>
           </React.Fragment>
         </Router>
       </Wrapper>

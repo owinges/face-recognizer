@@ -20,15 +20,6 @@ form {
   padding: 3rem;
 }
 
-.navbar, .footer {
-  background: transparent;
-}
-
-article {
-  position: fixed;
-  bottom: 0;
-}
-
 ::placeholder {
   color: black;
 }

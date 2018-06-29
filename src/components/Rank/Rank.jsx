@@ -16,7 +16,10 @@ const moveInBottom = keyframes`
 const Message = styled.article`
     animation: ${moveInBottom} .4s ease;
     background-color: ${props => props.theme.primary};
+    cursor: default;
     display: ${props => (props.display === 'invisible' ? 'none' : '')};
+    position: relative;
+    bottom: 9rem;
     width: 260px;
 `;
 
@@ -28,12 +31,15 @@ const MessageHeader = styled.div`
     justify-content: space-between;
     padding-left: 1rem;
 
-    &p {
-        width: 50%;
+    p {
+        width: 80%;
     }
 
-    &button {
-        width: 50%;
+    button {
+        background-color: ${props => props.theme.tertiary};
+        border: none;
+        cursor: pointer;
+        width: 20%;
     }
 `;
 
