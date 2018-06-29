@@ -18,8 +18,8 @@ const Message = styled.article`
     background-color: ${props => props.theme.primary};
     cursor: default;
     display: ${props => (props.display === 'invisible' ? 'none' : '')};
-    position: relative;
-    bottom: 9rem;
+    /* position: relative; */
+    /* bottom: 9rem; */
     width: 260px;
 `;
 

@@ -8,6 +8,9 @@ const Navbar = styled.nav`
     display: flex;
     height: 6rem;
     justify-content: space-between;
+    @media only screen and (max-width: 500px) {
+        background-color: transparent;
+    }
 `;
 
 const NavbarStart = styled.div`
@@ -21,10 +24,15 @@ const NavbarEnd = styled.div`
 `;
 
 const NavBrand = styled.div`
-    padding: .5rem 1rem;
     height: 100%;
+    padding: .5rem 1rem;
+
     img {
         height: 100%;
+    }
+
+    @media only screen and (max-width: 500px) {
+        display: none;
     }
 `;
 
@@ -41,6 +49,25 @@ const NavLink = styled(Link)`
     &:hover {
         background-color: ${props => props.theme.secondary};
     }
+
+    @media only screen and (max-width: 500px) {
+        display: none;
+    }
+`;
+
+const NavMobile = styled.div`
+    cursor: pointer;
+    display: none;
+    height: 100%;
+    padding: .5rem 1rem;
+
+    img {
+        height: 100%;
+    }
+
+    @media only screen and (max-width: 500px) {
+        display: block;
+    }
 `;
 
 const Navigation = ({ isLoggedIn }) => {
@@ -52,6 +79,9 @@ const Navigation = ({ isLoggedIn }) => {
                 </NavBrand>
             </NavbarStart>
             <NavbarEnd>
+                <NavMobile>
+                    <img src={brain} alt='Brain logo' />
+                </NavMobile>
                 {isLoggedIn ? (
                     <NavLink to='/login'>Log Out</NavLink>
                 ) : (

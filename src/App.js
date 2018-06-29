@@ -40,11 +40,12 @@ const Container = styled.div`
 `;
 
 const Footer = styled.footer`
-  background-color: ${props => props.theme.primary};
+  /* background-color: ${props => props.theme.primary}; */
+  background-color: transparent;
   bottom: 0;
-  height: 6rem;
+  /* height: 6rem; */
   position: absolute;
-  width: 100%;
+  /* width: 100%; */
 `;
 
 export default class App extends Component {
@@ -201,9 +202,7 @@ export default class App extends Component {
                 <Redirect to='/auth/register' />
               </Route>
               <Route path='/auth/:id' render={() => (
-                <Section>
-                  <Auth clearUser={this.clearUser} loadUser={this.loadUser} />
-                </Section>
+                <Auth clearUser={this.clearUser} loadUser={this.loadUser} />
               )} />
             </Switch>
             <Footer>

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Title, FormField, FormControl, Input, SubmitButton } from '../../StyledComponents/Auth';
+import { Form, Title, FormField, FormControl, Input, SubmitButton } from '../../StyledComponents/Auth';
 
 const Login = ({ onEmailChange, onPasswordChange, onSubmitLogin }) => {
     return (
-        <form>
+        <Form>
             <Title>Log In</Title>
 
             <FormField>
@@ -30,7 +30,7 @@ const Login = ({ onEmailChange, onPasswordChange, onSubmitLogin }) => {
             </FormField>
 
             <SubmitButton onClick={onSubmitLogin}>Login</SubmitButton>
-        </form>
+        </Form>
     );
 }
 

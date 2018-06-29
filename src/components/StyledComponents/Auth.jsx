@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     display: flex;
+    align-content: center;
     justify-content: space-around;
 `;
 
@@ -11,10 +12,15 @@ export const Card = styled.div`
     border-radius: .5rem;
     box-shadow: 4px 4px 8px 0px rgba( 0, 0, 0, 0.2 );
     color: #0a0a0a;
-    margin-top: 10vh;
-    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
     width: 500px;
+    @media only screen and (max-width: 500px) {
+        width: 400px;
+    }
 `;
 
 export const CardHead = styled.div`
@@ -75,4 +81,8 @@ export const SubmitButton = styled.button`
         background-color: ${props => props.theme.tertiary};
         color: white;
     }
+`;
+
+export const Form = styled.form`
+    padding: 3rem;
 `;
