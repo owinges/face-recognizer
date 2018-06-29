@@ -15,33 +15,34 @@ const Form = styled.div`
 `;
 
 const Input = styled.input`
-    background-color: transparent;
+    background-color: ${props => props.theme.secondary};
     border: 1px solid #0a0a0a;
-    border-bottom-left-radius: .4rem;
+    /* border-bottom-left-radius: .4rem; */
     border-right: 0;
     box-shadow: 0 1px 2px rgba(10, 10, 10, 0.1);
     color: #0a0a0a;
     display: flex;
-    font-size: 1rem;
-    height: 100%;
+    font-size: 1.75rem;
+    height: 4rem;
     max-width: 100%;
-    padding: .5rem;
+    padding: 2rem;
     width: 100%;
 `;
 
 const Button = styled.button`
-    background-color: transparent;
+    background-color: ${props => props.theme.secondary};
     border: 1px solid #0a0a0a;
-    border-bottom-right-radius: .4rem;
+    /* border-bottom-right-radius: .4rem; */
+    box-shadow: 0 1px 2px rgba(10, 10, 10, 0.1);
     color: #0a0a0a;
     cursor: pointer;
     display: flex;
-    font-size: 1.5rem;
-    height: 100%;
-    padding: 0 1.5rem;
+    font-size: 2.5rem;
+    height: 4.2rem;
+    padding: .5rem 2rem;
 
     &:hover {
-        background-color: #0a0a0a;
+        background-color: ${props => props.theme.tertiary};
         color: white;
     }
 `;

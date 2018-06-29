@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Column = styled.div`
     display: flex;
-    height: 600px;
+    height: 500px;
     justify-content: space-around;
     width: 900px;
 `;
@@ -32,7 +32,7 @@ const Image = styled.figure`
     img {
         /* height: auto; */
         width: auto;
-        max-height: 500px;
+        max-height: 400px;
         max-width: 800px;
     }
 `;
