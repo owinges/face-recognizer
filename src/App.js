@@ -17,9 +17,6 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Navigation from './components/Navigation/Navigation';
 import Rank from './components/Rank/Rank';
 
-// Other imports
-import './App.css';
-
 // Styled components
 
 const Wrapper = styled.main`
