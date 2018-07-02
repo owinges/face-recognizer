@@ -53,6 +53,7 @@ export default class App extends Component {
       input: '',
       imageUrl: '',
       boxes: [],
+      bytes: '',
       isLoggedIn: false,
       displayRank: false,
       user: {
@@ -144,7 +145,7 @@ export default class App extends Component {
     this.setState({ input: event.target.value });
   }
 
-  onSubmit = () => {
+  onUrlSubmit = () => {
     this.setState({ imageUrl: this.state.input });
 
     axios.post('https://young-temple-60018.herokuapp.com/imageurl', {
@@ -174,6 +175,39 @@ export default class App extends Component {
     .catch(err => console.log(err));
   }
 
+  onFileSubmit = (file, byteString) => {
+    this.setState({
+      imageUrl: file,
+      bytes: byteString
+    });
+
+    axios.post('https://young-temple-60018.herokuapp.com/imagebytes', {
+      bytes: this.state.bytes
+    })
+    .then(response => {
+      if (response) {
+        axios.put('https://young-temple-60018.herokuapp.com/image', {
+          id: this.state.user.id
+        })
+          .then(response => {
+            this.setState({
+              user: {
+                id: this.state.user.id,
+                name: this.state.user.name,
+                email: this.state.user.email,
+                entries: response.data,
+                joined: this.state.user.joined
+              }
+            });
+            this.toggleRank();
+          })
+          .catch(error => console.log(error))
+      }
+      this.displayFaceBoxes(this.calculateFaceLocation(response));
+    })
+    .catch(err => console.log(err));
+  }
+
   render () {
     const { isLoggedIn, imageUrl, boxes, user, displayRank } = this.state;
     
@@ -188,7 +222,7 @@ export default class App extends Component {
                 <Section>
                   <Container>
                     <FaceRecognition boxes={boxes} imageUrl={imageUrl} />
-                    <ImageLinkForm inputChange={this.onInputChange} submit={this.onSubmit} />
+                    <ImageLinkForm inputChange={this.onInputChange} urlSubmit={this.onUrlSubmit} fileSubmit={this.onFileSubmit} />
                   </Container>
                 </Section>
               ) : <Redirect to='/auth/login' />} />
