@@ -1,17 +1,39 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const Column = styled.div`
+const TogglerBox = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     width: 900px;
+
+    @media only screen and (max-width: 500px) {
+        width: 400px;
+    }
+`;
+
+const FormBox = styled.div`
+    align-items: center;
+    background: ${props => props.theme.background};
+    border: 1px solid #0a0a0a;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    justify-content: center;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    z-index: 1999;
 `;
 
 const Form = styled.div`
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     height: 3rem;
-    /* width: 100%; */
+    width: 90%;
+    margin-top: 5rem;
 `;
 
 const Input = styled.input`
@@ -24,9 +46,9 @@ const Input = styled.input`
     display: flex;
     font-size: 1.75rem;
     height: 4rem;
-    max-width: 100%;
+    max-width: 80%;
     padding: 2rem;
-    /* width: 100%; */
+    width: 80%;
 `;
 
 const Button = styled.button`
@@ -40,6 +62,8 @@ const Button = styled.button`
     font-size: 2.5rem;
     height: 4.2rem;
     padding: .5rem 2rem;
+    width: 20%;
+    max-width: 20%;
 
     &:hover {
         background-color: ${props => props.theme.tertiary};
@@ -50,7 +74,6 @@ const Button = styled.button`
 const Toggler = styled.button`
     background-color: ${props => props.theme.secondary};
     border: 1px solid #0a0a0a;
-    /* border-bottom-right-radius: .4rem; */
     box-shadow: 0 1px 2px rgba(10, 10, 10, 0.1);
     color: #0a0a0a;
     cursor: pointer;
@@ -58,6 +81,7 @@ const Toggler = styled.button`
     font-size: 2.5rem;
     height: 4.2rem;
     padding: .5rem 2rem;
+    transform: translate(-0.4rem, -4.6rem);
 
     &:hover {
         background-color: ${props => props.theme.tertiary};
@@ -70,7 +94,7 @@ class ImageLinkForm extends Component {
         super(props);
 
         this.state = {
-            mode: 'URL'
+            displayForm: false
         }
     }
 
@@ -88,32 +112,40 @@ class ImageLinkForm extends Component {
             this.props.fileSubmit(event.target.result, byteString);
         };
         
+        this.toggleDisplay();
         reader.readAsDataURL(file);
     }
 
-    toggleMode = () => {
-        if (this.state.mode === 'URL') {
-            this.setState({ mode: 'FILE' });
-        } else {
-            this.setState({ mode: 'URL' });
-        }
+    handleUrlSubmit = () => {
+        this.toggleDisplay();
+        this.props.urlSubmit();
+    }
+
+    toggleDisplay = () => {
+        this.setState({ displayForm: !this.state.displayForm });
     }
 
     render () {
-        const { inputChange, urlSubmit } = this.props;
-        const { mode } = this.state;
+        const { inputChange } = this.props;
+        const { displayForm } = this.state;
         
         return (
-            <Column>
-                <Form>
-                    <Input type='text' onChange={inputChange} />
-                    <Button onClick={urlSubmit}>Detect</Button>
-                </Form>
-                <form onSubmit={this.handleUploadImage}>
-                    <input ref={(ref) => { this.uploadInput = ref; }} type='file' accept='image/*' />
-                    <input type="submit" />
-                </form>
-            </Column>
+            (!displayForm ? (
+                <TogglerBox>
+                    <Toggler onClick={this.toggleDisplay}>Select Image</Toggler>
+                </TogglerBox>
+            ) : (
+                <FormBox>
+                    <Form>
+                        <Input type='text' placeholder='Enter an image URL' onChange={inputChange} />
+                        <Button onClick={this.handleUrlSubmit}>Detect</Button>
+                    </Form>
+                    <Form>
+                        <input ref={(ref) => { this.uploadInput = ref; }} type='file' accept='image/*' />
+                        <Button onClick={this.handleUploadImage}>Detect</Button>
+                    </Form>
+                </FormBox>
+            ))
         );
     }
 }

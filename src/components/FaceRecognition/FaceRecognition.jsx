@@ -3,16 +3,21 @@ import styled from 'styled-components';
 
 const Column = styled.div`
     display: flex;
-    height: 500px;
+    height: 600px;
     justify-content: space-around;
     width: 900px;
+
+    @media only screen and (max-width: 500px) {
+        height: 500px;
+        width: 400px;
+    }
 `;
 
 const FaceRecognitionBox = styled.div`
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
     border: 1px solid #0a0a0a;
-    border-bottom: 0;
+    /* border-bottom: 0; */
     border-top-left-radius: .4rem;
     border-top-right-radius: .4rem;
     box-shadow: 4px 4px 8px 0px rgba( 0, 0, 0, 0.2 );
@@ -29,11 +34,17 @@ const Image = styled.figure`
     position: relative;
     /* height: 100%; */
     /* width: 100%; */
+
     img {
         /* height: auto; */
         width: auto;
-        max-height: 400px;
+        max-height: 500px;
         max-width: 800px;
+
+        @media only screen and (max-width: 500px) {
+            max-height: 400px;
+            max-width: 300px;
+        }
     }
 `;
 
@@ -50,6 +61,11 @@ const BoundingBox = styled.div`
     bottom: ${props => props.sides.bottom}px;
     left: ${props => props.sides.left}px;
     opacity: .5;
+
+    @media only screen and (max-width: 500px) {
+        opacity: 1;
+    }
+
     &:hover {
         opacity: 1;
     }
@@ -60,10 +76,17 @@ const AgeBox = styled.span`
     border-radius: .5rem;
     color: black;
     height: 2.5rem;
+    max-width: 100%;
     padding: .5rem 2rem;
     position: relative;
     top: -4rem;
     z-index: 1000;
+`;
+
+const LoadingIndicator = styled.h1`
+    color: ${props => props.theme.tertiary};
+    font-size: 4rem;
+    position: absolute;
 `;
 
 export default class FaceRecognition extends Component {
@@ -85,11 +108,18 @@ export default class FaceRecognition extends Component {
         })
     }
 
+    displayLoader = () => {
+        if (this.props.imageUrl.length !== 0 && this.props.boxes.length === 0) {
+            return <LoadingIndicator>Loading...</LoadingIndicator>
+        }
+    }
+
     render () {
         const { boxes, imageUrl } = this.props;
 
         return (
             <Column>
+                {this.displayLoader()}
                 <FaceRecognitionBox>
                     <Image>
                         <img id='inputImage' src={imageUrl} alt='' />

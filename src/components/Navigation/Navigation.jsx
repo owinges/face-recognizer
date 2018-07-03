@@ -162,13 +162,13 @@ class Navigation extends React.Component {
                 </NavbarEnd>
                 <MobileMenu showMenu={displayMenu}>
                     {this.props.isLoggedIn ? (
-                        <MobileNavLink to='/login'>Log Out</MobileNavLink>
+                        <MobileNavLink to='/login' onClick={this.menuToggle}>Log Out</MobileNavLink>
                     ) : (
-                            <React.Fragment>
-                                <MobileNavLink to='/login'>Log In</MobileNavLink>
-                                <MobileNavLink to='/register'>Register</MobileNavLink>
-                            </React.Fragment>
-                        )}
+                        <React.Fragment>
+                            <MobileNavLink to='/login' onClick={this.menuToggle}>Log In</MobileNavLink>
+                            <MobileNavLink to='/register' onClick={this.menuToggle}>Register</MobileNavLink>
+                        </React.Fragment>
+                    )}
                 </MobileMenu>
             </Navbar>
         );
