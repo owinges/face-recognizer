@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import logo from '../../assets/logo.png';
 
 const Column = styled.div`
     display: flex;
@@ -8,8 +9,12 @@ const Column = styled.div`
     width: 900px;
 
     @media only screen and (max-width: 500px) {
-        height: 500px;
-        width: 400px;
+        /* height: 500px; */
+        /* width: 400px; */
+        position: absolute;
+        top: 6rem;
+        height: calc(100vh - 6rem);
+        width: 100vw;
     }
 `;
 
@@ -76,23 +81,54 @@ const AgeBox = styled.span`
     border-radius: .5rem;
     color: black;
     height: 2.5rem;
-    max-width: 100%;
     padding: .5rem 2rem;
-    position: relative;
     top: -4rem;
+    width: 10rem;
+    position: absolute;
     z-index: 1000;
 `;
 
-const LoadingIndicator = styled.h1`
-    color: ${props => props.theme.tertiary};
-    font-size: 4rem;
+const LoadingBox = styled.div`
     position: absolute;
+    top: 9rem;
+    z-index: 2000;
+`;
+
+const LoadingText = styled.span`
+    color: ${props => props.theme.tertiary};
+    display: inline-block;
+    font-size: 4rem;
+    padding: 0 1rem;
+    transform: translateY(-1.6rem);
+`;
+
+const Spinner = styled.div`
+    background-image: url(${logo});
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 64px;
+    width: 64px;
+`;
+
+const rotate360 = keyframes`
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+`;
+
+const Rotate = styled.div`
+    animation: ${rotate360} 1.5s linear infinite;
+    display: inline-block;
 `;
 
 export default class FaceRecognition extends Component {
     displayFaceBoxes (boxes) {
         return boxes.map((box, index) => {
-            return (                    
+            return (
                 <BoundingBox
                     sides={{
                         top: box.topRow,
@@ -102,7 +138,7 @@ export default class FaceRecognition extends Component {
                     }}
                     key={index}
                 >
-                    <AgeBox>{box.data.age} years old</AgeBox>
+                    <AgeBox>{`${box.data.age} years old`}</AgeBox>
                 </BoundingBox>
             );
         })
@@ -110,7 +146,13 @@ export default class FaceRecognition extends Component {
 
     displayLoader = () => {
         if (this.props.imageUrl.length !== 0 && this.props.boxes.length === 0) {
-            return <LoadingIndicator>Loading...</LoadingIndicator>
+            return (
+                <LoadingBox>
+                    <Rotate><Spinner></Spinner></Rotate>
+                    <LoadingText>Loading</LoadingText>
+                    <Rotate><Spinner></Spinner></Rotate>
+                </LoadingBox>
+            )
         }
     }
 
@@ -119,8 +161,8 @@ export default class FaceRecognition extends Component {
 
         return (
             <Column>
-                {this.displayLoader()}
                 <FaceRecognitionBox>
+                    {this.displayLoader()}
                     <Image>
                         <img id='inputImage' src={imageUrl} alt='' />
                         {this.displayFaceBoxes(boxes)}

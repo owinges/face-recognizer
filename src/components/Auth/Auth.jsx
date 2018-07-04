@@ -6,6 +6,7 @@ import Login from './Login/Login';
 import Register from './Register/Register';
 
 import { Container, Card, CardHead, Tab } from '../StyledComponents/Auth';
+import { ErrorModal } from '../StyledComponents/ErrorModal';
 
 class Auth extends Component {
     constructor(props) {
@@ -15,7 +16,8 @@ class Auth extends Component {
             auth: this.props.match.params.id,
             email: '',
             name: '',
-            password: ''
+            password: '',
+            error: ''
         };
     }
 
@@ -52,7 +54,10 @@ class Auth extends Component {
                     this.props.history.push('/');
                 }
             })
-            .catch(error => console.log(error))
+            .catch((error) => {
+                console.log(error);
+                this.displayErrorModal('Incorrect username or password. Please try again.');
+            })
     }
 
     onSubmitRegister = (event) => {
@@ -72,11 +77,24 @@ class Auth extends Component {
             .catch(error => console.log(error))
     }
 
+    displayErrorModal = (errorMessage) => {
+        this.setState({ error: errorMessage });
+    }
+
+    closeErrorModal = () => {
+        this.setState({ error: '' });
+    }
+
     render() {
-        const { auth } = this.state;
+        const { auth, error } = this.state;
 
         return (
             <Container>
+                <ErrorModal show={error.length > 0 ? 'block' : 'none'}>
+                    <h1>ERROR</h1>
+                    <p>{error}</p>
+                    <button onClick={this.closeErrorModal}>OK</button>
+                </ErrorModal>
                 <Card>
                     <CardHead>
                         <Tab

@@ -7,7 +7,10 @@ const TogglerBox = styled.div`
     width: 900px;
 
     @media only screen and (max-width: 500px) {
-        width: 400px;
+        /* width: 400px; */
+        width: 100vw;
+        position: absolute;
+        bottom: 0;
     }
 `;
 
@@ -86,6 +89,10 @@ const Toggler = styled.button`
     &:hover {
         background-color: ${props => props.theme.tertiary};
         color: white;
+    }
+
+    @media only screen and (max-width: 500px) {
+        transform: translate(-1rem, -1rem);
     }
 `;
 

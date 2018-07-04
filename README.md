@@ -24,3 +24,6 @@ The app is hosted on Heroku and can be viewed at: https://dry-inlet-52104.heroku
 * Implement validation for all forms
 * Display errors in the front end (currently only displayed in the console)
 * Display loading indicator (spinner, etc) when waiting for API response
+
+**Known Bugs**
+* Bounding box appears incorrectly on photos taken in portrait mode on mobile devices.
