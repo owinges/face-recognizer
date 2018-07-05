@@ -9,8 +9,6 @@ const Column = styled.div`
     width: 900px;
 
     @media only screen and (max-width: 500px) {
-        /* height: 500px; */
-        /* width: 400px; */
         position: absolute;
         top: 6rem;
         height: calc(100vh - 6rem);
@@ -22,7 +20,6 @@ const FaceRecognitionBox = styled.div`
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
     border: 1px solid #0a0a0a;
-    /* border-bottom: 0; */
     border-top-left-radius: .4rem;
     border-top-right-radius: .4rem;
     box-shadow: 4px 4px 8px 0px rgba( 0, 0, 0, 0.2 );
@@ -30,6 +27,12 @@ const FaceRecognitionBox = styled.div`
     justify-content: center;
     height: 100%;
     width: 100%;
+
+    @media only screen and (max-width: 500px) {
+        border-left: 0;
+        border-radius: 0;
+        border-right: 0;
+    }
 `;
 
 const Image = styled.figure`
@@ -37,25 +40,21 @@ const Image = styled.figure`
     display: flex;
     justify-content: center;
     position: relative;
-    /* height: 100%; */
-    /* width: 100%; */
 
     img {
-        /* height: auto; */
         width: auto;
         max-height: 500px;
         max-width: 800px;
 
         @media only screen and (max-width: 500px) {
-            max-height: 400px;
-            max-width: 300px;
+            max-height: calc(100vh - 6rem - 2px);
+            max-width: 100vw;
         }
     }
 `;
 
 const BoundingBox = styled.div`
     position: absolute;
-    /* box-shadow: 0 0 0 3px #149df2 inset; */
     box-shadow: 0 0 0 3px ${props => props.theme.primary} inset;
     cursor: default;
     display: flex;
@@ -121,7 +120,7 @@ const rotate360 = keyframes`
 `;
 
 const Rotate = styled.div`
-    animation: ${rotate360} 1.5s linear infinite;
+    animation: ${rotate360} 1s linear infinite;
     display: inline-block;
 `;
 

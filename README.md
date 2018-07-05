@@ -15,15 +15,15 @@ The app is hosted on Heroku and can be viewed at: https://dry-inlet-52104.heroku
 6. PostgreSQL
 7. Node
 8. Express
+9. Express-validator
 
 **Changes Currently In Progress**
 * Improve styling of all components, particularly the Face Recognition and Image Link Form components.
 
 **Upcoming Changes**
 * Clean up / optimize code
-* Implement validation for all forms
+* Implement front end validation for all forms
 * Display errors in the front end (currently only displayed in the console)
-* Display loading indicator (spinner, etc) when waiting for API response
 
 **Known Bugs**
 * Bounding box appears incorrectly on photos taken in portrait mode on mobile devices.

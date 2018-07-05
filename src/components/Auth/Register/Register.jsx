@@ -10,6 +10,7 @@ const Register = ({ onNameChange, onEmailChange, onPasswordChange, onSubmitRegis
             <FormField>
                 <FormControl>
                     <Input
+                        required
                         type="name"
                         id='name'
                         placeholder="Enter your first name"
@@ -21,6 +22,7 @@ const Register = ({ onNameChange, onEmailChange, onPasswordChange, onSubmitRegis
             <FormField>
                 <FormControl>
                     <Input
+                        required
                         type="email"
                         id='email'
                         placeholder="Enter your email address"
@@ -32,6 +34,7 @@ const Register = ({ onNameChange, onEmailChange, onPasswordChange, onSubmitRegis
             <FormField>
                 <FormControl>
                     <Input
+                        required
                         type="password"
                         placeholder="Enter your password"
                         id='password'

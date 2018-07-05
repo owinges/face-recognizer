@@ -146,7 +146,10 @@ export default class App extends Component {
   }
 
   onUrlSubmit = () => {
-    this.setState({ imageUrl: this.state.input });
+    this.setState({
+      boxes: [],
+      imageUrl: this.state.input
+    });
 
     axios.post('https://young-temple-60018.herokuapp.com/imageurl', {
       input: this.state.input
@@ -177,6 +180,7 @@ export default class App extends Component {
 
   onFileSubmit = (file, byteString) => {
     this.setState({
+      boxes: [],
       imageUrl: file,
       bytes: byteString
     });
