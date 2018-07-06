@@ -11,7 +11,7 @@ const Column = styled.div`
     @media only screen and (max-width: 500px) {
         position: absolute;
         top: 6rem;
-        height: calc(100vh - 6rem);
+        height: calc(100% - 6rem);
         width: 100vw;
     }
 `;
@@ -47,7 +47,7 @@ const Image = styled.figure`
         max-width: 800px;
 
         @media only screen and (max-width: 500px) {
-            max-height: calc(100vh - 6rem - 2px);
+            max-height: calc(100% - 6rem - 2px);
             max-width: 100vw;
         }
     }

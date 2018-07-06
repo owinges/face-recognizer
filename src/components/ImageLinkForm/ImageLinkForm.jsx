@@ -112,16 +112,16 @@ class ImageLinkForm extends Component {
         }
     }
 
-    handleUploadImage = (ev) => {
-        ev.preventDefault();
+    handleUploadImage = (e) => {
+        e.preventDefault();
 
         // Close modal if there is no file
-        if (this.uploadInput.files.length === 0) {
+        if (this.refs.uploadInput.files.length === 0) {
             this.toggleDisplay();
             return;
         }
 
-        var file = this.uploadInput.files[0];
+        var file = this.refs.uploadInput.files[0];
         const reader = new FileReader();
 
         reader.onload = (event) => {
@@ -162,7 +162,13 @@ class ImageLinkForm extends Component {
                         <button onClick={this.handleUrlSubmit}>Detect</button>
                     </form>
                     <form>
-                        <input ref={(ref) => { this.uploadInput = ref; }} type='file' accept='image/*' onChange={this.handleUploadImage} />
+                        <input
+                            // ref={(ref) => { this.uploadInput = ref; }}
+                            ref='uploadInput'
+                            type='file'
+                            accept='image/*'
+                            onChange={this.handleUploadImage}
+                        />
                         {/* <button onClick={this.handleUploadImage}>Detect</button> */}
                     </form>
                 </FormBox>

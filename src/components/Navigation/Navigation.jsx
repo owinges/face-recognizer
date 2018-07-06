@@ -100,7 +100,7 @@ const MobileMenu = styled.div`
     background-color: ${props => props.theme.primary};
     display: ${props => (props.showMenu === true ? 'flex' : 'none')};
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
     position: absolute;
     width: 100vw;
     z-index: 2000;
@@ -142,13 +142,11 @@ class Navigation extends React.Component {
             <Navbar>
                 <NavbarStart>
                     <NavBrand>
-                        {/* <img height='64px' src={logo} alt='Owinges logo' /> */}
                         <Logo></Logo>
                     </NavBrand>
                 </NavbarStart>
                 <NavbarEnd>
                     <NavMobile>
-                        {/* <img height='64px' src={logo} alt='Owinges logo' /> */}
                         <Logo onClick={this.menuToggle}></Logo>
                     </NavMobile>
                     {this.props.isLoggedIn ? (

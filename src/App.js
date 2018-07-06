@@ -20,7 +20,7 @@ import Rank from './components/Rank/Rank';
 // Styled components
 
 const Wrapper = styled.main`
-  min-height: 100vh;
+  min-height: 100%;
   max-height: 100%;
 `;
 
